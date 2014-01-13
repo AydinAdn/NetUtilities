@@ -1,5 +1,0 @@
-c:\users\aydin\documents\visual studio 2013\Projects\Utilities\Utilities\bin\Debug\Utilities.dll
-c:\users\aydin\documents\visual studio 2013\Projects\Utilities\Utilities\bin\Debug\Utilities.pdb
-c:\users\aydin\documents\visual studio 2013\Projects\Utilities\Utilities\obj\Debug\Utilities.csprojResolveAssemblyReference.cache
-c:\users\aydin\documents\visual studio 2013\Projects\Utilities\Utilities\obj\Debug\Utilities.dll
-c:\users\aydin\documents\visual studio 2013\Projects\Utilities\Utilities\obj\Debug\Utilities.pdb
