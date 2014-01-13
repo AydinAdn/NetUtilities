@@ -1,0 +1,9 @@
+C:\Users\Aydin\Documents\Visual Studio 2013\Projects\PlaySharp\Utilities\bin\Debug\Utilities.dll
+C:\Users\Aydin\Documents\Visual Studio 2013\Projects\PlaySharp\Utilities\bin\Debug\Utilities.pdb
+C:\Users\Aydin\Documents\Visual Studio 2013\Projects\PlaySharp\Utilities\obj\Debug\Utilities.csprojResolveAssemblyReference.cache
+C:\Users\Aydin\Documents\Visual Studio 2013\Projects\PlaySharp\Utilities\obj\Debug\Utilities.dll
+C:\Users\Aydin\Documents\Visual Studio 2013\Projects\PlaySharp\Utilities\obj\Debug\Utilities.pdb
+C:\Users\Aydin\Documents\Visual Studio 2013\Projects\Utilities\bin\Debug\Utilities.dll
+C:\Users\Aydin\Documents\Visual Studio 2013\Projects\Utilities\bin\Debug\Utilities.pdb
+C:\Users\Aydin\Documents\Visual Studio 2013\Projects\Utilities\obj\Debug\Utilities.dll
+C:\Users\Aydin\Documents\Visual Studio 2013\Projects\Utilities\obj\Debug\Utilities.pdb
