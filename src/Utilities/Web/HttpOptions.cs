@@ -20,12 +20,12 @@ namespace Utilities.Web
     {
         public HttpOptions()
         {
-            ProtocolVersion = HttpProtocol.Version11;
-            HttpMethod = HttpMethod.Get;
-            HttpAcceptHeader = "*/*";
-            UserAgent = UserAgents.GetRandomUserAgent();
+            ProtocolVersion     = HttpProtocol.Version11;
+            HttpMethod          = HttpMethod.Get;
+            HttpAcceptHeader    = "*/*";
+            UserAgent           = UserAgents.GetRandomUserAgent();
             DecompressionMethod = DecompressionMethods.GZip;
-            AllowAutoRedirect = true;
+            AllowAutoRedirect   = true;
         }
 
         /// <summary>
@@ -94,6 +94,8 @@ namespace Utilities.Web
         ///     <para>Default is randomly selected</para>
         /// </summary>
         public string UserAgent { get; set; }
+
+        public CookieContainer Cookies { get; set; }
 
         internal Version ParseHttpVersion()
         {

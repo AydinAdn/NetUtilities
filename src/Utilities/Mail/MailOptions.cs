@@ -1,12 +1,11 @@
-﻿using System.Net;
-
-namespace Utilities.Mail
+﻿namespace Utilities.Mail
 {
     public sealed class MailOptions
     {
+        public string Username { get; set; }
+        public string Password { get; set; }
         public string SMTPHost { get; set; }
         public int SMTPPort { get; set; }
-        public NetworkCredential Credentials { get; set; }
         public string To { get; set; }
         public string From { get; set; }
         public string Subject { get; set; }

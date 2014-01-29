@@ -18,7 +18,7 @@ namespace Utilities.Crypt
             string chars = "";
             for (int i = 0; i < length; i++)
             {
-                var rng = new RNGCryptoServiceProvider();
+                var rng  = new RNGCryptoServiceProvider();
                 var bits = new Byte[1];
 
                 do { rng.GetNonZeroBytes(bits); } while (bits[0] > 248);
@@ -39,7 +39,7 @@ namespace Utilities.Crypt
             string chars = "";
             for (int i = 0; i < length; i++)
             {
-                var rng = new RNGCryptoServiceProvider();
+                var rng  = new RNGCryptoServiceProvider();
                 var bits = new Byte[1];
 
                 do { rng.GetNonZeroBytes(bits); } while (bits[0] > 248);

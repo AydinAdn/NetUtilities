@@ -10,13 +10,13 @@ namespace Utilities.Extension
         /// </summary>
         public static string ConvertToString(this Byte[] array)
         {
-            var str = new StringBuilder();
-            int i;
-            for (i = 0; i < array.Length; i++)
+            var stringBuilder = new StringBuilder();
+
+            foreach (byte bite in array)
             {
-                str.Append(String.Format("{0:X2}", array[i]));
+                stringBuilder.Append(String.Format("{0:X2}", bite));
             }
-            return str.ToString();
+            return stringBuilder.ToString();
         }
 
         /// <summary>
@@ -25,8 +25,7 @@ namespace Utilities.Extension
         public static long ToUtcEpoch(this DateTime dateTime)
         {
             var epochBegan = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
-            TimeSpan span = (DateTime.UtcNow - epochBegan);
-            return ((long) span.TotalSeconds/7800);
+            return (long) (DateTime.UtcNow - epochBegan).TotalSeconds;
         }
 
         /// <summary>
@@ -35,8 +34,7 @@ namespace Utilities.Extension
         public static DateTime ConvertEpochToLocalDateTime(this long seconds)
         {
             var epochBegan = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
-
-            return epochBegan.ToLocalTime().AddSeconds(seconds); 
+            return epochBegan.ToLocalTime().AddSeconds(seconds);
         }
 
         /// <summary>
@@ -45,8 +43,7 @@ namespace Utilities.Extension
         public static DateTime ConvertEpochToUtcDateTime(this long seconds)
         {
             var epochBegan = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
-
-            return epochBegan.AddSeconds(seconds); 
+            return epochBegan.AddSeconds(seconds);
         }
     }
 }

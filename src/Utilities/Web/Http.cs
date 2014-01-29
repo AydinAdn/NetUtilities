@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Net;
 using System.Text;
 using Utilities.Web.Extras;
@@ -19,18 +20,18 @@ namespace Utilities.Web
         {
             string content;
 
-            var request                    = (HttpWebRequest)WebRequest.Create(url);
+            var request                    = (HttpWebRequest) WebRequest.Create(url);
             request.Method                 = WebRequestMethods.Http.Get;
             request.Accept                 = "*/*";
             request.UserAgent              = UserAgents.GetRandomUserAgent();
             request.AutomaticDecompression = DecompressionMethods.GZip;
             request.Headers.Add("Accept-Language: en-US,en;q=0.5");
-            
-            using (var response = (HttpWebResponse)request.GetResponse())
+
+            using (var response = (HttpWebResponse) request.GetResponse())
             {
                 using (Stream stream = response.GetResponseStream())
                 {
-                    if (stream == null) return "Stream is empty!";
+                    if (stream == null) throw new Exception("Stream is empty!");
 
                     using (var streamReader = new StreamReader(stream))
                     {
@@ -44,7 +45,7 @@ namespace Utilities.Web
 
         /// <summary>
         ///     Configures the web request with HttpOptions and
-        /// <para>retrieves the web pages response.</para>    
+        ///     <para>retrieves the web pages response.</para>
         /// </summary>
         /// <param name="options">Web request options</param>
         /// <returns>Content of the web page</returns>
@@ -52,7 +53,7 @@ namespace Utilities.Web
         {
             string content;
 
-            var request                    = (HttpWebRequest)WebRequest.Create(options.Url);
+            var request                    = (HttpWebRequest) WebRequest.Create(options.Url);
             request.ProtocolVersion        = options.ParseHttpVersion();
             request.Headers                = options.HeaderCollection;
             request.Accept                 = options.HttpAcceptHeader;
@@ -62,7 +63,8 @@ namespace Utilities.Web
             request.Referer                = options.Referer;
             request.UserAgent              = options.UserAgent;
             request.AllowAutoRedirect      = options.AllowAutoRedirect;
-            request.Timeout                = (int)options.RequestTimeout.TotalMilliseconds;
+            request.CookieContainer        = options.Cookies;
+            request.Timeout                = (int) options.RequestTimeout.TotalMilliseconds;
 
             if (options.HttpMethod == HttpMethod.Post)
             {
@@ -73,14 +75,14 @@ namespace Utilities.Web
                 using (Stream requestStream = request.GetRequestStream())
                 {
                     requestStream.Write(postBytes, 0, postBytes.Length);
-                } 
+                }
             }
 
-            using (var response = (HttpWebResponse)request.GetResponse())
+            using (var response = (HttpWebResponse) request.GetResponse())
             {
                 using (Stream stream = response.GetResponseStream())
                 {
-                    if (stream == null) return "Stream is empty!";
+                    if (stream == null) throw new Exception("Stream is empty!");
 
                     using (var streamReader = new StreamReader(stream))
                     {
@@ -103,7 +105,7 @@ namespace Utilities.Web
             string content;
             byte[] postBytes = Encoding.UTF8.GetBytes(data);
 
-            var request                    = (HttpWebRequest)WebRequest.Create(url);
+            var request                    = (HttpWebRequest) WebRequest.Create(url);
             request.Method                 = WebRequestMethods.Http.Post;
             request.Accept                 = "*/*";
             request.UserAgent              = UserAgents.GetRandomUserAgent();
@@ -117,11 +119,12 @@ namespace Utilities.Web
                 requestStream.Write(postBytes, 0, postBytes.Length);
             }
 
-            using (var response = (HttpWebResponse)request.GetResponse())
+            using (var response = (HttpWebResponse) request.GetResponse())
             {
                 using (Stream stream = response.GetResponseStream())
                 {
-                    if (stream == null) return "Stream is empty!";
+                    if (stream == null) throw new Exception("Stream is empty!");
+
                     using (var streamReader = new StreamReader(stream))
                     {
                         content = streamReader.ReadToEnd();
@@ -130,6 +133,74 @@ namespace Utilities.Web
             }
 
             return content;
+        }
+
+        /// <summary>
+        ///     Downloads files from the specified URL
+        /// </summary>
+        /// <param name="url">URL of the file</param>
+        /// <param name="path">Path to save the file to</param>
+        public static void Download(string url, string path)
+        {
+            var request       = (HttpWebRequest) WebRequest.Create(url);
+            request.Method    = WebRequestMethods.Http.Get;
+            request.Accept    = "*/*";
+            request.UserAgent = UserAgents.GetRandomUserAgent();
+
+            using (WebResponse response = request.GetResponse())
+            {
+                using (Stream stream = response.GetResponseStream())
+                {
+                    using (Stream fileStream = File.OpenWrite(path))
+                    {
+                        if (stream == null) throw new Exception("Stream is empty!");
+
+                        var buffer    = new byte[4096];
+                        int bytesRead = stream.Read(buffer, 0, 4096);
+                        while (bytesRead > 0)
+                        {
+                            fileStream.Write       (buffer, 0, bytesRead);
+                            bytesRead = stream.Read(buffer, 0, 4096);
+                        }
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        ///     Downloads files with HttpOptions
+        /// </summary>
+        /// <param name="options">Web request options</param>
+        /// <param name="path">Path to save the file to</param>
+        public static void Download(HttpOptions options, string path)
+        {
+            var request             = (HttpWebRequest) WebRequest.Create(options.Url);
+            request.ProtocolVersion = options.ParseHttpVersion();
+            request.Headers         = options.HeaderCollection;
+            request.Accept          = options.HttpAcceptHeader;
+            request.Proxy           = options.Proxy;
+            request.Referer         = options.Referer;
+            request.UserAgent       = options.UserAgent;
+            request.CookieContainer = options.Cookies;
+
+            using (WebResponse response = request.GetResponse())
+            {
+                using (Stream stream = response.GetResponseStream())
+                {
+                    using (Stream fileStream = File.OpenWrite(path))
+                    {
+                        if (stream == null) throw new Exception("Stream is empty!");
+
+                        var buffer    = new byte[4096];
+                        int bytesRead = stream.Read(buffer, 0, 4096);
+                        while (bytesRead > 0)
+                        {
+                            fileStream.Write       (buffer, 0, bytesRead);
+                            bytesRead = stream.Read(buffer, 0, 4096);
+                        }
+                    }
+                }
+            }
         }
     }
 }
