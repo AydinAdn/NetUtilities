@@ -10,7 +10,7 @@ To install Net Utilities, run the following command in the Package Manager Conso
 
 
 ##### Examples and documentation
-Head over to our [WIKI](https://github.com/AydinAdn/NetUtilities/wiki/Home-wiki) to explore NetUtilities.
+Head over to our [WIKI](https://github.com/AydinAdn/NetUtilities/wiki/Home-wiki) to explore the NetUtilities library.
 
 [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/AydinAdn/netutilities/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 
