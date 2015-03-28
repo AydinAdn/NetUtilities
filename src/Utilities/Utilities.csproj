@@ -87,9 +87,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Security" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Crypt\Dpapi.cs" />
     <Compile Include="Crypt\RNGStringProvider.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Mail\MailOptions.cs" />

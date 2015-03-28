@@ -45,5 +45,15 @@ namespace Utilities.Extension
             var epochBegan = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
             return epochBegan.AddSeconds(seconds);
         }
+
+        public static bool IsNullOrWhiteSpace(this string text)
+        {
+            return string.IsNullOrWhiteSpace(text);
+        }
+
+        public static bool IsNullOrEmpty(this string text)
+        {
+            return string.IsNullOrEmpty(text);
+        }
     }
 }
